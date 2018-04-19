@@ -43,7 +43,8 @@ def plot_upwind(T, X, grid_u):
     plt.show()
 
 
-def plot_simple_lax_3d(T,delta_t,X,delta_x,grid_rho,grid_v):
+def plot_upwind_3d(T,delta_t,X,grid_rho,grid_v):
+    delta_x = c.L / (X - 1)
     fig = plt.figure()
     ax = fig.gca(projection='3d')
     x=np.arange(-X*delta_x/2,X*delta_x/2,delta_x)
@@ -70,7 +71,7 @@ def plot_simple_lax_3d(T,delta_t,X,delta_x,grid_rho,grid_v):
 
 def main():
     grid_u = solve_upwind(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
-    plot_simple_lax_3d(c.TIME_POINTS,c.delta_t, c.SPACE_POINTS, c.delta_x, grid_u[:,:,0],grid_u[:,:,0])
+    plot_upwind_3d(c.TIME_POINTS,c.delta_t, c.SPACE_POINTS, c.delta_x, grid_u[:,:,0],grid_u[:,:,0])
     #plot_upwind(c.TIME_POINTS, c.SPACE_POINTS, grid_u[:,:,0])
     #plot_upwind(c.TIME_POINTS, c.SPACE_POINTS, grid_u[:,:,1])
 

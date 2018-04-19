@@ -41,14 +41,10 @@ if __name__ == "__main__":
 
 
     elif Master_Flag=='Upwind':
-        for i in range(10,15):
-            space_points=2**i
-            print(space_points)
-            d_x = c.L / (space_points - 1)
-            grid_u = up_v2.solve_upwind(c.TIME_POINTS, space_points, c.MAX_TIME)
-            up_v2.plot_upwind(c.TIME_POINTS,space_points, grid_u[:, :, 0])
-            #up_v2.plot_upwind(c.TIME_POINTS, space_points, grid_u[:, :, 1])
-            plt.show()
+        grid_u = up_v2.solve_upwind(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
+        up_v2.plot_upwind_3d(c.TIME_POINTS,c.delta_t, c.SPACE_POINTS, grid_u[:,:,0],grid_u[:,:,0])
+        #up_v2.plot_upwind(c.TIME_POINTS, space_points, grid_u[:, :, 1])
+        plt.show()
 
     elif Master_Flag=='Lax Wendroff':
         grid_u = lw.solve_lax_wendroff(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
