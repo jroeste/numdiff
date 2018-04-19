@@ -15,6 +15,7 @@ def u_next_lax_friedrichs(u_last, delta_t, delta_x, j, time, position):
 def one_step_lax_friedrichs(u_last, X, delta_t, delta_x ,time):
     u_next = np.zeros((X,2))
     u_next[0,:] = c.RHO_0, func.safe_v(c.RHO_0)
+    u_next[0,:]=u_last[1][0],func.safe_v(u_last[1][0])
     for j in range(1,X-1):
         position=j*delta_x-c.L/2
         u_next[j] = u_next_lax_friedrichs(u_last, delta_t, delta_x, j, time, position)
@@ -40,11 +41,10 @@ def plot_lax_friedrichs(T, X, grid_u):
     plt.show()
 
 
-def plot_lax_friedrichs_3d(T, X, MAX_TIME, grid_rho):
-    delta_x = c.L / (X - 1)
-    delta_t = MAX_TIME / (T - 1)
+def plot_lax_friedrichs_3d_rho(T, X, MAX_TIME, grid_rho):
+    delta_x = c.L/(X-1)
+    delta_t = MAX_TIME/(T-1)
     fig = plt.figure("Density of cars (car/m)")
-
     ax = fig.gca(projection='3d')
     x=np.arange(-X*delta_x/2,X*delta_x/2,delta_x)
     y=np.arange(0,T*delta_t,delta_t)
@@ -57,8 +57,7 @@ def plot_lax_friedrichs_3d(T, X, MAX_TIME, grid_rho):
     fig.colorbar(surf,shrink=0.5)
     plt.show()
 
-
-def plot_lax_friedrichs2_3d_v(T, X, MAX_TIME, grid_v):
+def plot_lax_friedrichs_3d_v(T, X, MAX_TIME, grid_v):
     delta_x = c.L / (X - 1)
     delta_t = MAX_TIME / (T - 1)
     fig = plt.figure("Speed of cars (m/s)")
@@ -76,21 +75,6 @@ def plot_lax_friedrichs2_3d_v(T, X, MAX_TIME, grid_v):
 
 
 
-def plot_lax_friedrichs2_3d_rho(T, X, MAX_TIME, grid_rho):
-    delta_x = c.L/(X-1)
-    delta_t = MAX_TIME/(T-1)
-    fig = plt.figure("Density of cars (car/m)")
-    ax = fig.gca(projection='3d')
-    x=np.arange(-X*delta_x/2,X*delta_x/2,delta_x)
-    y=np.arange(0,T*delta_t,delta_t)
-    x,y=np.meshgrid(x,y)
-    surf=ax.plot_surface(x,y,grid_rho,cmap=cm.coolwarm,linewidth=0)
-    ax.text2D(0.05, 0.95, "Density of cars (car/m)", transform=ax.transAxes)
-    ax.set_xlabel("Distance (m)")
-    ax.set_ylabel("Time (s)")
-    ax.set_zlabel("Density (car/m)")
-    fig.colorbar(surf,shrink=0.5)
-    plt.show()
 
 
 def main():

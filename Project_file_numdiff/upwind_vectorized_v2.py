@@ -15,8 +15,8 @@ def u_next_upwind(u_last, delta_t, delta_x, j, time, position):
 
 def one_step_upwind(u_last, X, delta_t, delta_x ,time):
     u_next = np.zeros((X,2))
-    #u_next[0, :] = c.RHO_0, c.safe_v(c.RHO_0)
-    u_next[0,:] = u_last[1][0], c.safe_v(u_last[1][0])
+    #u_next[0, :] = c.RHO_0, func.safe_v(c.RHO_0)
+    u_next[0,:] = u_last[1][0], func.safe_v(u_last[1][0])
     for j in range(1,X-1):
         position=j*delta_x-c.L/2
         u_next[j] = u_next_upwind(u_last, delta_t, delta_x, j, time, position)
