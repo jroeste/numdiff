@@ -21,7 +21,7 @@ if __name__ == "__main__":
     Master_Flag = {
                     0: 'Lax-Friedrichs',
                     1: 'Upwind',
-                    2: 'Lax Wendroff',
+                    2: 'Lax-Wendroff',
                     3: 'Time Convergence',
                     4: 'Spatial Convergence',
                     5: 'General Convergence',
@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
 
 
-            }[1]        #<-------Write number of the function you want to test.
+            }[3]        #<-------Write number of the function you want to test.
 
     if Master_Flag =='Lax-Friedrichs':
         grid_u = lf.solve_lax_friedrichs(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
@@ -50,12 +50,13 @@ if __name__ == "__main__":
             #up_v2.plot_upwind(c.TIME_POINTS, space_points, grid_u[:, :, 1])
             plt.show()
 
-    elif Master_Flag=='Lax Wendroff':
+    elif Master_Flag=='Lax-Wendroff':
         grid_u = lw.solve_lax_wendroff(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
         lw.plot_lax_wendroff(c.TIME_POINTS, c.SPACE_POINTS, grid_u[:, :, 0])
         lw.plot_lax_wendroff(c.TIME_POINTS, c.SPACE_POINTS, grid_u[:, :, 1])
 
     elif Master_Flag=='Time Convergence':
+        print("Time Convergence")
         tc.plot_time_convergence_2(lf.solve_lax_friedrichs, up_v2.solve_upwind, lw.solve_lax_wendroff, mc_v2.solve_mac_cormack)
 
 

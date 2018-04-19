@@ -95,7 +95,7 @@ def main():
     plot_simple_lax_3d_v(c.TIME_POINTS, c.SPACE_POINTS,c.MAX_TIME,grid_u[:,:,1])
     #plot_simple_lax(c.TIME_POINTS, c.SPACE_POINTS, grid_u[:,:,1])
 
-main()
+#main()
 
 
 
