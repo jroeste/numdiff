@@ -31,14 +31,14 @@ if __name__ == "__main__":
 
 
 
-<<<<<<< HEAD
-            }[4]        #<-------Write number of the function you want to test.
+            }[1]        #<-------Write number of the function you want to test.
 
     if Master_Flag =='Lax-Friedrich':
+
         grid_u = lf.solve_lax_friedrichs(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
-        lf.plot_lax_friedrichs_3d_rho(c.TIME_POINTS, c.SPACE_POINTS, c.delta_x, grid_u[:, :, 0])
-        lf.plot_lax_friedrichs_3d_v(c.TIME_POINTS, c.SPACE_POINTS, c.delta_x, grid_u[:, :, 0])
-        #plot_lax_friedrichs(c.TIME_POINTS, c.SPACE_POINTS, c.delta_x, grid_u[:, :, 0])
+        lf.plot_lax_friedrichs(c.TIME_POINTS,c.SPACE_POINTS,grid_u)
+        #lf.plot_lax_friedrichs_3d_rho(c.TIME_POINTS,c.delta_t, c.SPACE_POINTS, c.delta_x, grid_u[:, :, 0])
+        #lf.plot_lax_friedrichs_3d_v(c.TIME_POINTS, c.delta_t,c.SPACE_POINTS, c.delta_x, grid_u[:, :, 1])
 
 
     elif Master_Flag=='Upwind':
