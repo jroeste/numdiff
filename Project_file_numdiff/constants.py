@@ -1,12 +1,11 @@
 import numpy as np
 
 M = 12
-#MAX_TIME = 500*60 #seconds
 
-TIME_POINTS = 1000
-
+MAX_TIME = 60 #seconds
+TIME_POINTS = 50
 #SPACE_POINTS = 2**(M)
-SPACE_POINTS=1000
+SPACE_POINTS=10
 L=5000 #meter
 
 

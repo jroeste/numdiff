@@ -25,16 +25,14 @@ if __name__ == "__main__":
                     3: 'Time Convergence',
                     4: 'Spatial Convergence',
                     5: 'General Convergence',
-                    6: ' 3d plot'
-
+                    6: '3d plot'
 
 
 
 
             }[1]        #<-------Write number of the function you want to test.
 
-    if Master_Flag =='Lax-Friedrich':
-
+    if Master_Flag =='Lax-Friedrichs':
         grid_u = lf.solve_lax_friedrichs(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
         lf.plot_lax_friedrichs(c.TIME_POINTS,c.SPACE_POINTS,grid_u)
         #lf.plot_lax_friedrichs_3d_rho(c.TIME_POINTS,c.delta_t, c.SPACE_POINTS, c.delta_x, grid_u[:, :, 0])
@@ -48,7 +46,7 @@ if __name__ == "__main__":
             d_x = c.L / (space_points - 1)
             grid_u = up_v2.solve_upwind(c.TIME_POINTS, space_points, c.MAX_TIME)
             up_v2.plot_upwind(c.TIME_POINTS,space_points, grid_u[:, :, 0])
-            #up_v2.plot_upwind(c.TIME_POINTS,space_points, grid_u[:, :, 1]# )
+            #up_v2.plot_upwind(c.TIME_POINTS, space_points, grid_u[:, :, 1])
             plt.show()
 
     elif Master_Flag=='Lax Wendroff':
@@ -57,8 +55,7 @@ if __name__ == "__main__":
         lw.plot_lax_wendroff(c.TIME_POINTS, c.SPACE_POINTS, grid_u[:, :, 1])
 
     elif Master_Flag=='Time Convergence':
-        tc.plot_time_convergence_2(lf.solve_lax_friedrichs, up_v2.solve_upwind,
-                                lw.solve_lax_wendroff, mc_v2.solve_mac_cormack)
+        tc.plot_time_convergence_2(lf.solve_lax_friedrichs, up_v2.solve_upwind, lw.solve_lax_wendroff, mc_v2.solve_mac_cormack)
 
 
     elif Master_Flag=='Spatial Convergence':
@@ -67,7 +64,10 @@ if __name__ == "__main__":
     elif Master_Flag=='General Convergence':
         gc.plot_general_convergence(up_v2.solve_upwind)
 
-    elif Master_Flag==' 3d plot':
-        grid_u = sl_v.solve_simple_lax(c.TIME_POINTS, c.SPACE_POINTS, c.delta_t, c.delta_x)
-        sl_v.plot_simple_lax_3d_rho(c.TIME_POINTS,c.delta_t,c.SPACE_POINTS,c.delta_x,grid_u[:,:,0])
-        sl_v.plot_simple_lax_3d_v(c.TIME_POINTS,c.delta_t,c.SPACE_POINTS,c.delta_x,grid_u[:,:,1])
+    elif Master_Flag=='3d plot':
+        grid_u = lf.solve_lax_friedrichs(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
+        lf.plot_lax_friedrichs2_3d_rho(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME, grid_u[:, :, 0])
+        lf.plot_lax_friedrichs2_3d_v(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME, grid_u[:, :, 1])
+        #grid_u = sl_v.solve_simple_lax(c.TIME_POINTS, c.SPACE_POINTS, c.delta_t, c.delta_x)
+        #sl_v.plot_simple_lax_3d_rho(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME, grid_u[:,:,0])
+        #sl_v.plot_simple_lax_3d_v(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME, grid_u[:,:,1])
