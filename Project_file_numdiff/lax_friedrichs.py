@@ -37,8 +37,9 @@ def plot_lax_friedrichs(T, X, grid_u):
     delta_x = c.L/(X-1)
     x=np.linspace(-X/2*delta_x,X/2*delta_x,X)
     plt.figure()
-    plt.plot(x,grid_u[T-1])
+    plt.plot(x,grid_u[T-1][0])
     plt.show()
+    plt.plot(x,grid_u[T-1][1])
 
 
 def plot_lax_friedrichs_3d_rho(T, X, MAX_TIME, grid_rho):

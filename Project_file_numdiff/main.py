@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
 
 
-            }[0]        #<-------Write number of the function you want to test.
+            }[1]        #<-------Write number of the function you want to test.
 
     if Master_Flag =='Lax-Friedrichs':
         grid_u = lf.solve_lax_friedrichs(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
