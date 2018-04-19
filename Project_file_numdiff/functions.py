@@ -13,7 +13,6 @@ def safe_v(rho):
 def q_in(time):
     return 2
 
-
 def phi(x):
     return (2*np.pi*c.SIGMA**2)**(-0.5)*np.exp(-x**2/(2*c.SIGMA**2))
 
