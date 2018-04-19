@@ -19,7 +19,7 @@ def f(u_last):
 def s(time, position, u_last, delta_t, delta_x, j):
     s_step = np.zeros(2)
     s_step[:] = func.q_in(time)*func.phi(position), (1/c.TAU)*((c.V0*(1-u_last[j,0]/c.RHO_MAX))/(1+c.E*(u_last[j,0]/c.RHO_MAX)**4)
-                                                         - u_last[j,1])+c.MY(u_last[j+1,1]-2*u_last[j,1]
+                                                         - u_last[j,1])+c.MY*(u_last[j+1,1]-2*u_last[j,1]
                                                          + u_last[j-1,1])/(u_last[j,0]*delta_x**2)
     return s_step
 
@@ -95,7 +95,7 @@ def main():
     plot_simple_lax_3d_v(c.TIME_POINTS, c.SPACE_POINTS,c.MAX_TIME,grid_u[:,:,1])
     #plot_simple_lax(c.TIME_POINTS, c.SPACE_POINTS, grid_u[:,:,1])
 
-#main()
+main()
 
 
 
