@@ -13,12 +13,12 @@ delta_t=0.1
 MAX_TIME=(TIME_POINTS-1)*delta_t
 delta_x=L/(SPACE_POINTS-1)  #meter
 
-V0=33.33
-RHO_MAX=0.140
-E=100
-RHO_0=0.05
+V0=33.33 #m/s
+RHO_MAX=0.140 #vehicles/m
+E=100 #
+RHO_0=0.05 #vehicles/m
 
-SIGMA=300
-MY=0
-TAU=30
-C=15
+SIGMA=300 #
+MY=0 #
+TAU=30 #sec
+C=15 #m/s

@@ -25,7 +25,7 @@ def spatial_convergence_vec(solver, T, X, MAX_TIME, M, startnumber):
     step_length_list = np.zeros(M -startnumber-1)
 
     for j in range(startnumber,M-1):
-        x_points = 2 ** (j + 1)
+        x_points = 2**(j+1)
         new_exact_list = np.zeros((x_points,2))
         ratio = (len(exact_list) - 1) / (x_points - 1)
         for h in range(x_points):
@@ -33,11 +33,11 @@ def spatial_convergence_vec(solver, T, X, MAX_TIME, M, startnumber):
 
         delta_x = c.L / (x_points - 1)
         step_length_list[j - startnumber] = delta_x
-        u = solver(c.TIME_POINTS, x_points, MAX_TIME)
+        u = solver(T, x_points, MAX_TIME)
         j_list=u[-1]
         convergence_list[0][j-startnumber] = np.sqrt(delta_x) * np.linalg.norm(new_exact_list[:,0] - j_list[:,0], 2)
         convergence_list[1][j-startnumber] = np.sqrt(delta_x) * np.linalg.norm(new_exact_list[:,1] - j_list[:,1], 2)
-        x = np.linspace(-2500,2500, x_points)
+        #x = np.linspace(-2500,2500, x_points)
         #plt.figure()
         #plt.plot(x, j_list[:,0], label='Test')
         #plt.plot(x, new_exact_list[:, 0], label='Exact')
@@ -105,30 +105,30 @@ def plot_spatial_convergence(solver1, solver2, solver3,solver4):
     #print("CFL-condition: delta_t = ", delta_t, " < ", delta_x/(c.V0+c.C), " = delta_x/(V0+C)")
 
     M = 14
-    m = 8
+    m = 6
     MAX_TIME = 1
     time_points = 100
     space_points = 2 ** M
 
     delta_x_list1, conv_1 = spatial_convergence_vec(solver1, time_points, space_points, MAX_TIME, M, m)
 
-    M = 10
+    M = 12
     m = 3
-    MAX_TIME = 20
-    time_points = 3000
-    space_points = 2 ** M
+    MAX_TIME = 40
+    time_points = 2000
+    space_points = 2**M
 
     delta_x_list2, conv_2 = spatial_convergence_vec(solver2, time_points, space_points, MAX_TIME, M, m)
 
     M = 10
     m = 3
-    MAX_TIME = 20
-    time_points = 3000
+    MAX_TIME = 160
+    time_points = 1000
     space_points = 2 ** M
 
     delta_x_list3, conv_3 = spatial_convergence_vec(solver3, time_points, space_points, MAX_TIME, M, m)
 
-    M = 12
+    M = 15
     m = 3
     MAX_TIME = 1
     time_points = 800
