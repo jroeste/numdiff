@@ -14,7 +14,7 @@ def u_next_lax_friedrichs(u_last, delta_t, delta_x, j, time, position):
 
 def one_step_lax_friedrichs(u_last, X, delta_t, delta_x ,time):
     u_next = np.zeros((X,2))
-    u_next[0,:] = c.RHO_0, func.safe_v(c.RHO_0)
+    #u_next[0,:] = c.RHO_0, func.safe_v(c.RHO_0)
     u_next[0,:]=u_last[1][0],func.safe_v(u_last[1][0])
     for j in range(1,X-1):
         position=j*delta_x-c.L/2
@@ -37,9 +37,11 @@ def plot_lax_friedrichs(T, X, grid_u):
     delta_x = c.L/(X-1)
     x=np.linspace(-X/2*delta_x,X/2*delta_x,X)
     plt.figure()
-    plt.plot(x,grid_u[T-1][0])
+    plt.plot(x,grid_u[T-1,:,0])
     plt.show()
-    plt.plot(x,grid_u[T-1][1])
+    plt.figure()
+    plt.plot(x,grid_u[T-1,:,1])
+    plt.show()
 
 
 def plot_lax_friedrichs_3d_rho(T, X, MAX_TIME, grid_rho):
@@ -55,7 +57,6 @@ def plot_lax_friedrichs_3d_rho(T, X, MAX_TIME, grid_rho):
     ax.set_xlabel("Distance (m)")
     ax.set_ylabel("Time (s)")
     ax.set_zlabel("Density (car/m)")
-    fig.colorbar(surf,shrink=0.5)
     plt.show()
 
 def plot_lax_friedrichs_3d_v(T, X, MAX_TIME, grid_v):
@@ -71,7 +72,6 @@ def plot_lax_friedrichs_3d_v(T, X, MAX_TIME, grid_v):
     ax.set_xlabel("Distance (m)")
     ax.set_ylabel("Time (s)")
     ax.set_zlabel("Speed (m/s)")
-    fig.colorbar(surf,shrink=0.5)
     plt.show()
 
 

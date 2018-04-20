@@ -23,7 +23,14 @@ def time_error(solver, space_points):
         time_points = 2**(i+1) #Number of time points in each iteration
         delta_t = T_max/(time_points-1) #delta t in each iteration
         u = solver(time_points, space_points, T_max)
+        print(u_ex[-1,:,0])
         error_rho = u_ex[-1,:,0]-u[-1,:,0]
+        x_list=np.linspace(-c.L/2,c.L/2,space_points)
+        plt.figure()
+        plt.plot(x_list,u_ex[-1,:,0],label="exact")
+        plt.plot(x_list, u[-1, :, 0], label="approx")
+        plt.legend()
+        plt.show()
         error_v = u_ex[-1,:,1]-u[-1,:,1]
         error_list_rho[i-m] = np.sqrt(delta_t)*np.linalg.norm(error_rho,2)
         error_list_v[i-m] = np.sqrt(delta_t)*np.linalg.norm(error_v,2)
