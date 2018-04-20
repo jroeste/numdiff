@@ -1,7 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 import constants as c
 import functions as func
+from matplotlib import cm
 
 def u_approx_mac_cormack(u_last, delta_t, delta_x, j, time, position):
     return u_last[j] - delta_t/delta_x*(func.f(u_last[j]) - func.f(u_last[j-1])) \
@@ -44,6 +46,38 @@ def plot_mac_cormack(T, X, delta_x, grid_u):
     plt.figure()
     plt.plot(x,grid_u[T-1])
     plt.show()
+
+def plot_maccormack_3d_rho(T, X, MAX_TIME, grid_rho):
+    delta_x = c.L/(X-1)
+    delta_t = MAX_TIME/(T-1)
+    fig = plt.figure("Density of cars (car/m)")
+    ax = fig.gca(projection='3d')
+    x=np.arange(-X*delta_x/2,X*delta_x/2,delta_x)
+    y=np.arange(0,T*delta_t,delta_t)
+    x,y=np.meshgrid(x,y)
+    surf=ax.plot_surface(x,y,grid_rho,cmap=cm.coolwarm,linewidth=0)
+    ax.set_xlabel("Distance (m)")
+    ax.set_ylabel("Time (s)")
+    ax.set_zlabel("Density (car/m)")
+    plt.savefig("lw_3d_rho.pdf")
+    plt.show()
+
+def plot_maccormack_3d_v(T, X, MAX_TIME, grid_v):
+    delta_x = c.L / (X - 1)
+    delta_t = MAX_TIME / (T - 1)
+    fig = plt.figure("Speed of cars (m/s)")
+    ax = fig.gca(projection='3d')
+    x=np.arange(-X*delta_x/2,X*delta_x/2,delta_x)
+    y=np.arange(0,T*delta_t,delta_t)
+    x,y=np.meshgrid(x,y)
+    surf=ax.plot_surface(x,y,grid_v,cmap=cm.coolwarm,linewidth=0)
+    ax.set_xlabel("Distance (m)")
+    ax.set_ylabel("Time (s)")
+    ax.set_zlabel("Speed (m/s)")
+    plt.savefig("lx_3d_v.pdf")
+    plt.show()
+
+
 
 def main():
     grid_u = solve_mac_cormack(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
