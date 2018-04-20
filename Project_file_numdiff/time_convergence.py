@@ -5,9 +5,9 @@ import constants as c
 
 def time_error(solver, space_points):
 
-    m = 3  #2^m points for first iteration
-    n = 13  #2^n points for last iteration
-    T_max = 1 * 20  # Time seconds until we stop the simulation
+    m = 4  #2^m points for first iteration
+    n = 12  #2^n points for last iteration
+    T_max = 1 * 10  # Time seconds until we stop the simulation
     T_ex = 2**(n+1)  # Number of time steps in the reference (exact) solution
     u_ex = solver(T_ex, space_points, T_max)
     delta_t_list = np.zeros(n-m+1)
@@ -32,8 +32,8 @@ def time_error(solver, space_points):
    
     
 def plot_time_convergence(solver):
-    space_points=2**7
-    delta_t_list, error_rho, error_v = time_error(solver, space_points, c.delta_x)
+    space_points=2**12
+    delta_t_list, error_rho, error_v = time_error(solver, space_points)
     plt.figure()
     plt.plot(delta_t_list, error_rho, label=r"$\rho$")
     plt.plot(delta_t_list, error_v, label= "v")
@@ -53,7 +53,7 @@ def plot_time_convergence_2(solver1,  solver2, solver3, solver4):
 
     plt.figure()
     plt.loglog(delta_t_list1, error_rho1, label= r"Lax-Friedrichs")
-    plt.loglog(delta_t_list2, error_rho2, label= r"Upwind")
+    plt.loglog(delta_t_list2, error_rho2, label= r"Lax-Friedrichs v2")
     plt.loglog(delta_t_list3, error_rho3, label= r"Lax-Wendroff")
     plt.loglog(delta_t_list4, error_rho4, label= r"MacCormack")
     plt.title(r"Convergence plot of $\rho$ in time")

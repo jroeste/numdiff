@@ -9,7 +9,7 @@ from time import time
 
 def u_next_lax_friedrichs(u_last, delta_t, delta_x, j, time, position):
     return (u_last[j+1]+u_last[j-1])/2 - delta_t/(2*delta_x)*(func.f(u_last[j+1])-func.f(u_last[j-1])) \
-           + delta_t*func.g(u_last, delta_x, j)\
+           + delta_t*func.g2(u_last, delta_x, j)\
            + delta_t*func.s(time, position, u_last, j)
 
 def one_step_lax_friedrichs(u_last, X, delta_t, delta_x ,time):
