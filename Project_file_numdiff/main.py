@@ -22,13 +22,10 @@ if __name__ == "__main__":
                     0: 'Lax-Friedrichs',
                     1: 'Upwind',
                     2: 'Lax-Wendroff',
-                    3: 'Time Convergence',
-                    4: 'Spatial Convergence',
-                    5: 'General Convergence',
+                    3: 'MacCormack',
+                    4: 'Time Convergence',
+                    5: 'Spatial Convergence',
                     6: '3d plot'
-
-
-
 
 
             }[4]        #<-------Write number of the function you want to test.
@@ -54,6 +51,11 @@ if __name__ == "__main__":
         grid_u = lw.solve_lax_wendroff(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
         lw.plot_lax_wendroff(c.TIME_POINTS, c.SPACE_POINTS, grid_u[:, :, 0])
         lw.plot_lax_wendroff(c.TIME_POINTS, c.SPACE_POINTS, grid_u[:, :, 1])
+
+    elif Master_Flag == 'MacCormack':
+        grid_u = mc_v2.solve_mac_cormack(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
+        mc_v2.plot_mac_cormack(c.TIME_POINTS, c.SPACE_POINTS, grid_u[:, :, 0])
+        mc_v2.plot_mac_cormack(c.TIME_POINTS, c.SPACE_POINTS, grid_u[:, :, 1])
 
     elif Master_Flag=='Time Convergence':
         print("Time Convergence")
