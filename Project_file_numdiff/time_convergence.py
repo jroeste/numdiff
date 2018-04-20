@@ -5,9 +5,9 @@ import constants as c
 
 def time_error(solver, space_points):
 
-    m = 3  #2^m points for first iteration
-    n = 13  #2^n points for last iteration
-    T_max = 1 * 20  # Time seconds until we stop the simulation
+    m = 4  #2^m points for first iteration
+    n = 12  #2^n points for last iteration
+    T_max = 1 * 10  # Time seconds until we stop the simulation
     T_ex = 2**(n+1)  # Number of time steps in the reference (exact) solution
     u_ex = solver(T_ex, space_points, T_max)
     delta_t_list = np.zeros(n-m+1)

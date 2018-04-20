@@ -1,6 +1,6 @@
 import numpy as np
 
-M = 6
+M = 8
 
 
 #MAX_TIME = 60 #seconds
