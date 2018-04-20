@@ -5,9 +5,9 @@ import constants as c
 
 def time_error(solver, space_points):
 
-    m = 3  #2^m points for first iteration
-    n = 13  #2^n points for last iteration
-    T_max = 1 * 20  # Time seconds until we stop the simulation
+    m = 1  #2^m points for first iteration
+    n = 10  #2^n points for last iteration
+    T_max = 1 * 10  # Time seconds until we stop the simulation
     T_ex = 2**(n+1)  # Number of time steps in the reference (exact) solution
     u_ex = solver(T_ex, space_points, T_max)
     delta_t_list = np.zeros(n-m+1)
@@ -22,7 +22,14 @@ def time_error(solver, space_points):
         time_points = 2**(i+1) #Number of time points in each iteration
         delta_t = T_max/(time_points-1) #delta t in each iteration
         u = solver(time_points, space_points, T_max)
+        print(u_ex[-1,:,0])
         error_rho = u_ex[-1,:,0]-u[-1,:,0]
+        x_list=np.linspace(-c.L/2,c.L/2,space_points)
+        plt.figure()
+        plt.plot(x_list,u_ex[-1,:,0],label="exact")
+        plt.plot(x_list, u[-1, :, 0], label="approx")
+        plt.legend()
+        plt.show()
         error_v = u_ex[-1,:,1]-u[-1,:,1]
         error_list_rho[i-m] = np.sqrt(delta_t)*np.linalg.norm(error_rho,2)
         error_list_v[i-m] = np.sqrt(delta_t)*np.linalg.norm(error_v,2)
@@ -32,8 +39,8 @@ def time_error(solver, space_points):
    
     
 def plot_time_convergence(solver):
-    space_points=2**7
-    delta_t_list, error_rho, error_v = time_error(solver, space_points, c.delta_x)
+    space_points=2**8
+    delta_t_list, error_rho, error_v = time_error(solver, c.SPACE_POINTS)
     plt.figure()
     plt.plot(delta_t_list, error_rho, label=r"$\rho$")
     plt.plot(delta_t_list, error_v, label= "v")

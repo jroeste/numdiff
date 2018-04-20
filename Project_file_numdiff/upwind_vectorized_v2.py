@@ -43,35 +43,40 @@ def plot_upwind(T, X, grid_u):
     plt.show()
 
 
-def plot_upwind_3d(T,delta_t,X,grid_rho,grid_v):
-    delta_x = c.L / (X - 1)
-    fig = plt.figure()
+def plot_upwind_3d_rho(T, X, MAX_TIME, grid_rho):
+    delta_x = c.L/(X-1)
+    delta_t = MAX_TIME/(T-1)
+    fig = plt.figure("Density of cars (car/m)")
     ax = fig.gca(projection='3d')
     x=np.arange(-X*delta_x/2,X*delta_x/2,delta_x)
     y=np.arange(0,T*delta_t,delta_t)
     x,y=np.meshgrid(x,y)
-    ax.plot_surface(x, y, grid_rho,cmap=cm.coolwarm)
-    #plt.show()
-    #plt.figure()
-    #plt.imshow(grid_rho,cmap=plt.get_cmap('rainbow'))
-
+    surf=ax.plot_surface(x,y,grid_rho,cmap=cm.coolwarm,linewidth=0)
+    ax.text2D(0.05, 0.95, "Density of cars (car/m)", transform=ax.transAxes)
+    ax.set_xlabel("Distance (m)")
+    ax.set_ylabel("Time (s)")
+    ax.set_zlabel("Density (car/m)")
+    #fig.colorbar(surf,shrink=0.5)
     plt.show()
 
-    fig = plt.figure()
+def plot_upwind_3d_v(T, X, MAX_TIME, grid_v):
+    delta_x = c.L / (X - 1)
+    delta_t = MAX_TIME / (T - 1)
+    fig = plt.figure("Speed of cars (m/s)")
     ax = fig.gca(projection='3d')
-    x = np.arange(-X * delta_x / 2, X * delta_x / 2, delta_x)
-    y = np.arange(0, T * delta_t, delta_t)
-    x, y = np.meshgrid(x, y)
-    ax.plot_surface(x, y, grid_v, cmap=cm.coolwarm)
-    #plt.show()
-    #plt.figure()
-    #plt.imshow(grid_v, cmap=plt.get_cmap('rainbow'))
-
+    x=np.arange(-X*delta_x/2,X*delta_x/2,delta_x)
+    y=np.arange(0,T*delta_t,delta_t)
+    x,y=np.meshgrid(x,y)
+    surf=ax.plot_surface(x,y,grid_v,cmap=cm.coolwarm,linewidth=0)
+    ax.text2D(0.05, 0.95, "Speed of cars (m/s)", transform=ax.transAxes)
+    ax.set_xlabel("Distance (m)")
+    ax.set_ylabel("Time (s)")
+    ax.set_zlabel("Speed (m/s)")
+    #fig.colorbar(surf,shrink=0.5)
     plt.show()
-
 def main():
     grid_u = solve_upwind(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
-    plot_upwind_3d(c.TIME_POINTS,c.delta_t, c.SPACE_POINTS, c.delta_x, grid_u[:,:,0],grid_u[:,:,0])
+    plot_upwind_3d_rho(c.TIME_POINTS,c.delta_t, c.SPACE_POINTS, c.delta_x, grid_u[:,:,0],grid_u[:,:,0])
     #plot_upwind(c.TIME_POINTS, c.SPACE_POINTS, grid_u[:,:,0])
     #plot_upwind(c.TIME_POINTS, c.SPACE_POINTS, grid_u[:,:,1])
 
