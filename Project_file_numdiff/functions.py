@@ -31,6 +31,11 @@ def g2(u_last, delta_x, j):
                 + c.MY*(u_last[j+1,1]-2*u_last[j,1]+ u_last[j-1,1])/(u_last[j,0]*delta_x**2)
     return g_step
 
+def g3(u_last, delta_x, j):
+    g_step = np.zeros(2)
+    g_step[:] = 0, + c.MY*(u_last[j+1,1]-2*u_last[j,1]+ u_last[j-1,1])/(u_last[j,0]*delta_x**2)
+    return g_step
+
 
 def f(u_last):
     f_step = np.zeros(2)
