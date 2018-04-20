@@ -11,8 +11,8 @@ def safe_v(rho):
     return c.V0 * (1 - rho / c.RHO_MAX) / (1 + c.E * (rho / c.RHO_MAX) ** 4)
 
 def q_in(time):
-    if time < 30:
-        return 0.1
+    if time<30:
+        return 0.5
     else:
         return 0
 
@@ -55,3 +55,4 @@ def s(time, position, u_last, j):
 
 
 
+#print(safe_v(0.085))

@@ -18,6 +18,7 @@ def spatial_convergence_vec(solver, T, X, delta_t, delta_x):
     plt.show()
 """
 
+
 def spatial_convergence_vec(solver, T, X, MAX_TIME, M, startnumber):
     convergence_list = np.zeros((2, M-startnumber-1))
     u_exact = solver(T, X, MAX_TIME)
@@ -62,8 +63,8 @@ def spatial_convergence_vec(solver, T, X, MAX_TIME, M, startnumber):
     plt.show()'''
 
 def plot_spatial_convergence_lax(solver1, solver2):
-    M=14
-    time_points=100
+    M=10
+    time_points=1000
     space_points=2**M
     delta_t=0.01
     MAX_TIME = delta_t*time_points

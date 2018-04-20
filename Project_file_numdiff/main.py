@@ -31,9 +31,11 @@ if __name__ == "__main__":
 
 
 
-            }[4]        #<-------Write number of the function you want to test.
+            }[0]        #<-------Write number of the function you want to test.
+
 
     if Master_Flag =='Lax-Friedrichs':
+        #sc.plot_spatial_convergence_lax(4,lw.solve_lax_wendroff)
         grid_u = lf.solve_lax_friedrichs(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
         #lf.plot_lax_friedrichs(c.TIME_POINTS,c.SPACE_POINTS,grid_u)
         lf.plot_lax_friedrichs_3d_rho(c.TIME_POINTS,c.SPACE_POINTS, c.MAX_TIME, grid_u[:, :, 0])
@@ -41,14 +43,11 @@ if __name__ == "__main__":
 
 
     elif Master_Flag=='Upwind':
-        for i in range(10,15):
-            space_points=2**i
-            print(space_points)
-            d_x = c.L / (space_points - 1)
-            grid_u = up_v2.solve_upwind(c.TIME_POINTS, space_points, c.MAX_TIME)
-            up_v2.plot_upwind(c.TIME_POINTS,space_points, grid_u[:, :, 0])
-            #up_v2.plot_upwind(c.TIME_POINTS, space_points, grid_u[:, :, 1])
-            plt.show()
+        grid_u = up_v2.solve_upwind(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
+        up_v2.plot_upwind_3d_rho(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME, grid_u[:, :, 0])
+        up_v2.plot_upwind_3d_v(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME, grid_u[:, :, 1])
+        #up_v2.plot_upwind(c.TIME_POINTS, space_points, grid_u[:, :, 1])
+        plt.show()
 
     elif Master_Flag=='Lax-Wendroff':
         grid_u = lw.solve_lax_wendroff(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
