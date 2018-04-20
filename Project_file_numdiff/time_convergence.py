@@ -32,8 +32,8 @@ def time_error(solver, space_points):
    
     
 def plot_time_convergence(solver):
-    space_points=2**7
-    delta_t_list, error_rho, error_v = time_error(solver, space_points, c.delta_x)
+    space_points=2**12
+    delta_t_list, error_rho, error_v = time_error(solver, space_points)
     plt.figure()
     plt.plot(delta_t_list, error_rho, label=r"$\rho$")
     plt.plot(delta_t_list, error_v, label= "v")
@@ -53,7 +53,7 @@ def plot_time_convergence_2(solver1,  solver2, solver3, solver4):
 
     plt.figure()
     plt.loglog(delta_t_list1, error_rho1, label= r"Lax-Friedrichs")
-    plt.loglog(delta_t_list2, error_rho2, label= r"Upwind")
+    plt.loglog(delta_t_list2, error_rho2, label= r"Lax-Friedrichs v2")
     plt.loglog(delta_t_list3, error_rho3, label= r"Lax-Wendroff")
     plt.loglog(delta_t_list4, error_rho4, label= r"MacCormack")
     plt.title(r"Convergence plot of $\rho$ in time")

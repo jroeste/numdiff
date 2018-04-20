@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
 
 
-            }[3]        #<-------Write number of the function you want to test.
+            }[4]        #<-------Write number of the function you want to test.
 
     if Master_Flag =='Lax-Friedrichs':
         grid_u = lf.solve_lax_friedrichs(c.TIME_POINTS, c.SPACE_POINTS, c.MAX_TIME)
@@ -57,11 +57,12 @@ if __name__ == "__main__":
 
     elif Master_Flag=='Time Convergence':
         print("Time Convergence")
+        #tc.plot_time_convergence(sl_v.solve_simple_lax)
         tc.plot_time_convergence_2(lf.solve_lax_friedrichs, up_v2.solve_upwind, lw.solve_lax_wendroff, mc_v2.solve_mac_cormack)
 
 
     elif Master_Flag=='Spatial Convergence':
-        sc.plot_spatial_convergence(lf.solve_lax_friedrichs, mc_v2.solve_mac_cormack)
+        sc.plot_spatial_convergence(lf.solve_lax_friedrichs, up_v2.solve_upwind, lw.solve_lax_wendroff, mc_v2.solve_mac_cormack)
 
     elif Master_Flag=='General Convergence':
         gc.plot_general_convergence(up_v2.solve_upwind)
